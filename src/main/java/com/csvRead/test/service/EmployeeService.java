@@ -6,7 +6,6 @@ import com.csvRead.test.domain.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -19,10 +18,11 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public EmployeeDTO createEmployee() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("resources/file/test.csv"));
-        while(br.readLine() != null){
-            String[] data = br.readLine().split(",");
+    String line="";
+    public void createEmployee() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("src/main/resources/file/test.csv"));
+        while((line = br.readLine()) != null){
+            String[] data = line.split(",");
             Employee employee = new Employee();
             employee.setName(data[0]);
             employee.setAge(Integer.valueOf(data[1]));
@@ -32,6 +32,5 @@ public class EmployeeService {
 
             employeeRepository.save(employee);
         }
-        return null;
     }
 }

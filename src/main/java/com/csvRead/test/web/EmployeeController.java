@@ -1,9 +1,8 @@
 package com.csvRead.test.web;
 
-import com.csvRead.test.domain.DTOs.EmployeeDTO;
 import com.csvRead.test.service.EmployeeService;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -18,8 +17,8 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping("saveEmployee")
-    public EmployeeDTO createEmployee() throws IOException {
-        return employeeService.createEmployee();
+    @RequestMapping(path = "saveEmployee", method = { RequestMethod.GET, RequestMethod.POST })
+    public void createEmployee() throws IOException {
+        employeeService.createEmployee();
     }
 }
